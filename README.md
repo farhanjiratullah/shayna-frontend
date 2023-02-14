@@ -1,4 +1,6 @@
-# shayna
+# Nomads (Frontend)
+Kelas Full-Stack Website Developer: PHP Laravel dan Vue JS
+=======
 
 ## Project setup
 ```
