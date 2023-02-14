@@ -1,4 +1,4 @@
-# Nomads (Frontend)
+# Shayna (Frontend)
 Kelas Full-Stack Website Developer: PHP Laravel dan Vue JS
 =======
 
