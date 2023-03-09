@@ -8,7 +8,7 @@
             class="product-slider"
             :items-to-show="3"
             :wrapAround="true"
-            :autoplay="2000"
+            :autoplay="5000"
           >
             <slide
               class="product-item"
@@ -29,12 +29,19 @@
                       )
                     "
                   >
-                    <!-- <router-link to="/" class="primary-btn pd-cart"> -->
-                    <a href="#"><i class="icon_bag_alt"></i></a>
+                    <!-- <router-link to="/cart" class="primary-btn pd-cart"> -->
+                      <a @click="
+                        saveKeranjang(
+                          itemProduct.id,
+                          itemProduct.name,
+                          itemProduct.price,
+                          itemProduct.galleries[0].photo
+                        )
+                      "><i class="icon_bag_alt"></i></a>
                     <!-- </router-link> -->
                   </li>
                   <li class="quick-view">
-                    <router-link :to="'/product/' + itemProduct.id"
+                    <router-link :to="{ name: 'product', params: { id: itemProduct.id } }"
                       >+ Quick View</router-link
                     >
                   </li>
@@ -42,7 +49,7 @@
               </div>
               <div class="pi-text">
                 <div class="catagory-name">{{ itemProduct.type }}</div>
-                <router-link to="/product">
+                <router-link :to="{ name: 'product', params: { id: itemProduct.id } }">
                   <h5>{{ itemProduct.name }}</h5>
                 </router-link>
                 <div class="product-price">
@@ -97,7 +104,7 @@ export default {
       const parsed = JSON.stringify(this.keranjangUser);
       localStorage.setItem("keranjangUser", parsed);
 
-      window.location.reload();
+      this.$router.push({ name: 'cart' })
     },
   },
   mounted() {

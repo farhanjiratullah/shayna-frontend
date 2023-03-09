@@ -29,14 +29,15 @@
                 </div>
                 <div
                   class="product-thumbs"
-                  v-if="productDetails.galleries.length > 0"
+                  v-if="productDetails.galleries.length"
                 >
                   <carousel
                     class="product-thumbs-track ps-slider"
-                    :dots="false"
-                    :nav="false"
+                    :items-to-show="productDetails.galleries.length"
+                    :wrapAround="productDetails.galleries.length > 1 ? true : false"
+                    :autoplay="5000"
                   >
-                    <div
+                    <Slide
                       class="pt"
                       v-for="ss in productDetails.galleries"
                       :key="ss.id"
@@ -44,7 +45,11 @@
                       :class="ss.photo == gambar_default ? 'active' : ''"
                     >
                       <img :src="ss.photo" alt="" />
-                    </div>
+                    </Slide>
+                    <template #addons>
+                      <navigation v-if="productDetails.galleries.length > 1 ? true : false" />
+                      <pagination v-if="productDetails.galleries.length > 1 ? true : false" />
+                    </template>
                   </carousel>
                 </div>
               </div>
@@ -95,7 +100,8 @@
 import HeaderShayna from "@/components/HeaderShayna.vue";
 import FooterShayna from "@/components/FooterShayna.vue";
 import RelatedShayna from "@/components/RelatedShayna.vue";
-import carousel from "vue-owl-carousel";
+// import carousel from "vue-owl-carousel";
+import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
 import axios from "axios";
 
 export default {
@@ -105,7 +111,8 @@ export default {
     HeaderShayna,
     RelatedShayna,
     FooterShayna,
-    carousel,
+    Carousel, Slide, Pagination, Navigation
+    // carousel,
   },
   data() {
     return {
@@ -136,7 +143,7 @@ export default {
       localStorage.setItem("keranjangUser", parsed);
     },
   },
-  mounted() {
+  created() {
     if (localStorage.getItem("keranjangUser")) {
       try {
         this.keranjangUser = JSON.parse(localStorage.getItem("keranjangUser"));
@@ -145,12 +152,14 @@ export default {
       }
     }
     axios
-      .get("http://127.0.0.1:8000/api/products", {
+      .get("https://shayna-backend.test/api/products", {
         params: {
           id: this.$route.params.id,
         },
       })
-      .then((res) => this.setDataPicture(res.data.data))
+      .then((res) => {
+        this.setDataPicture(res.data.data)
+      })
       .catch((err) => console.log(err));
   },
 };

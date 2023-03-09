@@ -36,7 +36,7 @@
                     </thead>
                     <tbody v-if="keranjangUser.length > 0">
                       <tr
-                        v-for="keranjang in keranjangUser"
+                        v-for="(keranjang, index) in keranjangUser"
                         :key="keranjang.id"
                       >
                         <td class="cart-pic first-row">
@@ -50,7 +50,7 @@
                         </td>
                         <td
                           class="delete-item"
-                          @click="removeItem(keranjangUser.index)"
+                          @click="removeItem(index)"
                         >
                           <router-link to="/cart"
                             ><i class="material-icons"> close </i></router-link
@@ -202,8 +202,11 @@ export default {
       };
 
       axios
-        .post("http://127.0.0.1:8000/api/checkout", checkoutData)
-        .then(() => this.$router.push("success"))
+        .post("https://shayna-backend.test/api/checkout", checkoutData)
+        .then(() => {
+          this.$router.push("success")
+          localStorage.clear()
+        })
         .catch((err) => console.log(err));
     },
   },
@@ -214,7 +217,7 @@ export default {
       }, 0);
     },
     totalBiaya() {
-      let total = this.totalHarga + (this.totalHarga * 10) / 100;
+      let total = parseInt(this.totalHarga + (this.totalHarga * 10) / 100);
       return total;
     },
   },

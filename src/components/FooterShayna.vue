@@ -7,7 +7,7 @@
           <div class="footer-left text-left">
             <div class="footer-logo">
               <a href="#"
-                ><img src="img/logo_website_shayna_white.png" alt=""
+                ><img src="/img/logo_website_shayna_white.png" alt=""
               /></a>
             </div>
             <ul>
@@ -52,7 +52,7 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="copyright-text">
-              Copyright &copy; 2019 - 2021 All rights reserved | Shayna
+              Copyright &copy; 2019 - 2023 All rights reserved | Shayna
             </div>
           </div>
         </div>

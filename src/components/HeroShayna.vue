@@ -1,7 +1,7 @@
 <template>
   <!-- Hero Section Begin -->
   <section class="hero-section">
-    <carousel :items-to-show="1">
+    <carousel :items-to-show="1" :wrap-around="true" :autoplay="5000">
       <slide v-for="slide in 3" :key="slide">
         <div
         class="single-hero-items set-bg"

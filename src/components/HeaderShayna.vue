@@ -19,7 +19,7 @@
           <div class="col-lg-2 col-md-2">
             <div class="logo">
               <router-link to="/">
-                <img src="img/logo_website_shayna.png" alt="" />
+                <img src="/img/logo_website_shayna.png" alt="" />
               </router-link>
             </div>
           </div>
